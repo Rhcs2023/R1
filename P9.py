@@ -4,24 +4,6 @@ import tempfile
 
 # Diccionario con palabras a traducir
 diccionario = {
-   'america': '1 ',
-   'brasil': '2 ',
-   'cien': '3 ',
-   'dedo': '4 ',
-   'espacio': '5 ',
-   'fuego': '6 ',
-   'guerra': '7 ',
-  
-}
-
-
-
-import streamlit as st
-from gtts import gTTS
-import tempfile
-
-# Diccionario con palabras a traducir
-diccionario = {
     'mi': 'correcta ',
     'tu': 'excelente ',
     'idea': 'idea ',
@@ -84,6 +66,11 @@ if oracion_usuario:
     st.write(f"Traducción: {oracion_traducida}")
     audio_bytes = reproducir_audio(oracion_traducida, 'es')  # Usando español por defecto
     st.audio(audio_bytes, format='audio/mp3')
+
+
+
+
+
 
 
 
