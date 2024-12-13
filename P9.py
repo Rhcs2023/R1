@@ -4,27 +4,26 @@ import tempfile
 
 # Diccionario con palabras a traducir
 diccionario = {
-    'mi': 'correcta ',
-    'tu': 'excelente ',
-    'idea': 'idea ',
-    'dedo': '4 ',
-    'espacio': '5 ',
-    'fuego': '6 ',
-    'guerra': '7 ',
+    'mi': 'correcta',
+    'tu': 'excelente',
+    'idea': 'idea',
+    'dedo': '4',
+    'espacio': '5',
+    'fuego': '6',
+    'guerra': '7',
 }
 
 def traducir_oracion(oracion):
     palabras = oracion.split()
     oracion_traducida = []
-    
-    # Lista para las palabras que deben ser reubicadas
-    palabras_a_mover = [ ]
+    palabras_a_mover = []
 
     for palabra in palabras:
-        if palabra.lower() in diccionario:
-            # Si la palabra está en el diccionario, la añadimos a la lista de traducción
-            oracion_traducida.append(diccionario[palabra.lower()])
-            palabras_a_mover.append(diccionario[palabra.lower()])
+        palabra_lower = palabra.lower()
+        if palabra_lower in diccionario:
+            # Añadimos la traducción y guardamos la palabra para mover
+            oracion_traducida.append(diccionario[palabra_lower])
+            palabras_a_mover.append(diccionario[palabra_lower])
         else:
             oracion_traducida.append(palabra)
 
@@ -63,7 +62,6 @@ if oracion_usuario:
     st.write(f"Traducción: {oracion_traducida}")
     audio_bytes = reproducir_audio(oracion_traducida, 'es')  # Usando español por defecto
     st.audio(audio_bytes, format='audio/mp3')
-
 
 
 
