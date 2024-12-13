@@ -14,8 +14,7 @@ diccionario = {
 }
 
 def traducir_oracion(oracion):
-    palabras = oracion.split( 'mi',
-        'tu',)
+    palabras = oracion.split()
     oracion_traducida = []
     
     # Lista para las palabras que deben ser reubicadas
