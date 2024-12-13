@@ -541,7 +541,7 @@ def traducir_oracion(oracion):
     oracion_traducida = []
     
     # Contador para las letras que deben ser reubicadas
-    letras_a_mover = ["mi","tu"]
+    letras_a_mover = ['mi','tu']
     
     for palabra in palabras:
         if palabra.lower() in diccionario:
