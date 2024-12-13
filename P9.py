@@ -14,13 +14,13 @@ diccionario = {
 }
 
 def traducir_oracion(oracion):
-    palabras = oracion.split()
+    palabras = oracion.split( 'mi',
+        'tu',)
     oracion_traducida = []
     
     # Lista para las palabras que deben ser reubicadas
     palabras_a_mover = [
-        'mi',
-        'tu',
+       
     ]
 
     for palabra in palabras:
