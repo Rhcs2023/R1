@@ -1,36 +1,29 @@
-
 import streamlit as st
 from gtts import gTTS
 import tempfile
 
 # Diccionario con palabras a traducir
 diccionario = {
-    'uno': '1uno',
-    'dos': '2dos',
-    'tres': '3tres',
-    'cuatro': '4cuatro',
-    'cinco': '5cinco',
+    'mi': 'correcta',
+    'tu': 'excelente',
+    'idea': 'idea',
+    'dedo': '4',
+    'espacio': '5',
+    'fuego': '6',
+    'guerra': '7',
 }
-
-# Lista para palabras personalizadas
-palabras_personalizadas = [ 'uno', 'dos', 'tres']
 
 def traducir_oracion(oracion):
     palabras = oracion.split()
     oracion_traducida = []
-    palabras_a_mover = []
-    
-    # Combina el diccionario con las palabras personalizadas
-    diccionario_completo = {**diccionario}
-    for palabra in palabras_personalizadas:
-        diccionario_completo[palabra.lower()] = palabra.lower()  # Mantiene la palabra original
+    palabras_a_mover = ['mi','tu','idea']
 
     for palabra in palabras:
         palabra_lower = palabra.lower()
-        if palabra_lower in diccionario_completo:
+        if palabra_lower in diccionario:
             # Añadimos la traducción y guardamos la palabra para mover
-            oracion_traducida.append(diccionario_completo[palabra_lower])
-            palabras_a_mover.append(diccionario_completo[palabra_lower])
+            oracion_traducida.append(diccionario[palabra_lower])
+            palabras_a_mover.append(diccionario[palabra_lower])
         else:
             oracion_traducida.append(palabra)
 
@@ -61,12 +54,6 @@ if 'oracion_traducida' not in st.session_state:
 
 # Opción para introducir texto
 oracion_usuario = st.text_input("Introduce una palabra:")
-# Opción para añadir palabras personalizadas
-nueva_palabra = st.text_input("Añade una palabra personalizada para traducir:")
-
-# Agregar la nueva palabra a la lista de palabras personalizadas
-if nueva_palabra:
-    palabras_personalizadas.append(nueva_palabra)
 
 # Traducir la oración ingresada por el usuario
 if oracion_usuario:
@@ -75,7 +62,6 @@ if oracion_usuario:
     st.write(f"Traducción: {oracion_traducida}")
     audio_bytes = reproducir_audio(oracion_traducida, 'es')  # Usando español por defecto
     st.audio(audio_bytes, format='audio/mp3')
-
 
 
 
