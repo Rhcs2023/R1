@@ -4,40 +4,42 @@ import tempfile
 
 # Diccionario con palabras a traducir
 diccionario = {
-    'mi': 'correcta',
-    'tu': 'excelente',
-    'idea': 'idea',
-    'dedo': '4',
-    'espacio': '5',
-    'fuego': '6',
-    'guerra': '7',
-    'papa': '8',
+    'a': 'uno ',
+    'b': 'dos ',
+    'c': 'tres ',
+    'd': 'cuatro ',
+    'e': 'cinco ',
+    'f': 'seis ',
+    'g': 'siete ',
+    'mi': 'ri ',
+    'tuyo': 'tu ',
+    'mío': 'mi ',
 }
 
 def traducir_oracion(oracion):
     palabras = oracion.split()
     oracion_traducida = []
-    palabras_a_mover = []
-    sujeto_encontrado = False
+    palabras_clave_presentes = []
 
     for palabra in palabras:
         palabra_lower = palabra.lower()
         if palabra_lower in diccionario:
-            # Guardamos la traducción para moverla después
-            palabras_a_mover.append(diccionario[palabra_lower])
+            oracion_traducida.append(diccionario[palabra_lower])
+            palabras_clave_presentes.append(palabra_lower)
         else:
             oracion_traducida.append(palabra)
-            # Marcamos que hemos encontrado un sujeto
-            if palabra_lower in ['papá', 'mamá']:
-                sujeto_encontrado = True
 
-    # Si hay palabras a mover y se encontró un sujeto, las reubicamos
-    if palabras_a_mover and sujeto_encontrado:
-        # Insertamos las traducciones después del sujeto
-        for palabra in palabras_a_mover:
-            oracion_traducida.insert(oracion_traducida.index(palabra) + 1, palabra)
+    # Si hay alguna de las palabras clave, las movemos al segundo lugar
+    if palabras_clave_presentes:
+        # Eliminamos las palabras clave de su posición actual
+        for palabra_clave in palabras_clave_presentes:
+            oracion_traducida.remove(diccionario[palabra_clave])
 
-    return " ".join(oracion_traducida)
+        # Insertamos las palabras clave en segundo lugar
+        for palabra_clave in palabras_clave_presentes:
+            oracion_traducida.insert(1, diccionario[palabra_clave])
+
+    return " ".join(oracion_traducida).strip()
 
 def reproducir_audio(texto, lang):
     tts = gTTS(text=texto, lang=lang)
@@ -48,12 +50,13 @@ def reproducir_audio(texto, lang):
     return audio_bytes
 
 st.title("Traductor de números")
+
 # Estado de la sesión para la traducción
 if 'oracion_traducida' not in st.session_state:
     st.session_state.oracion_traducida = ""
 
 # Opción para introducir texto
-oracion_usuario = st.text_input("Introduce una oración:")
+oracion_usuario = st.text_input("Introduce una palabra:")
 
 # Traducir la oración ingresada por el usuario
 if oracion_usuario:
@@ -62,7 +65,6 @@ if oracion_usuario:
     st.write(f"Traducción: {oracion_traducida}")
     audio_bytes = reproducir_audio(oracion_traducida, 'es')  # Usando español por defecto
     st.audio(audio_bytes, format='audio/mp3')
-
 
 
 
