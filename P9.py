@@ -19,7 +19,7 @@ diccionario = {
 def traducir_oracion(oracion):
     palabras = oracion.split()
     oracion_traducida = []
-    palabras_clave_presentes = []
+    palabras_clave_presentes = [ 'mi' 'tuyo' 'mio']
 
     for palabra in palabras:
         palabra_lower = palabra.lower()
