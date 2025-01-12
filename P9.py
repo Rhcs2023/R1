@@ -4,16 +4,16 @@ import tempfile
 
 # Diccionario con palabras a traducir
 diccionario = {
-    'a': 'uno ',
-    'b': 'dos ',
-    'c': 'tres ',
-    'd': 'cuatro ',
-    'e': 'cinco ',
-    'f': 'seis ',
-    'g': 'siete ',
-    'mi': 'ri ',
-    'tuyo': 'tu ',
-    'mío': 'mi ',
+ #   'a': 'uno ',
+  #  'b': 'dos ',
+   # 'c': 'tres ',
+  #  'd': 'cuatro ',
+  #  'e': 'cinco ',
+  #  'f': 'seis ',
+  #  'g': 'siete ',
+   # 'mi': 'ri ',
+  #  'tuyo': 'tu ',
+  #  'mío': 'mi ',
 }
 
 def traducir_oracion(oracion):
