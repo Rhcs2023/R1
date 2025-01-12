@@ -18,28 +18,8 @@ diccionario = {
 
 def traducir_oracion(oracion):
     palabras = oracion.split()
-    oracion_traducida = []
-    palabras_clave_presentes = [ 'mi' ]
-
-    for palabra in palabras:
-        palabra_lower = palabra.lower()
-        if palabra_lower in diccionario:
-            oracion_traducida.append(diccionario[palabra_lower])
-            palabras_clave_presentes.append(palabra_lower)
-        else:
-            oracion_traducida.append(palabra)
-
-    # Si hay alguna de las palabras clave, las movemos al segundo lugar
-    if palabras_clave_presentes:
-        # Eliminamos las palabras clave de su posición actual
-        for palabra_clave in palabras_clave_presentes:
-            oracion_traducida.remove(diccionario[palabra_clave])
-
-        # Insertamos las palabras clave en segundo lugar
-        for palabra_clave in palabras_clave_presentes:
-            oracion_traducida.insert(1, diccionario[palabra_clave])
-
-    return " ".join(oracion_traducida).strip()
+    oracion_traducida = " ".join([diccionario.get(palabra.lower(), palabra) for palabra in palabras])
+    return oracion_traducida
 
 def reproducir_audio(texto, lang):
     tts = gTTS(text=texto, lang=lang)
@@ -49,14 +29,14 @@ def reproducir_audio(texto, lang):
             audio_bytes = audio_file.read()
     return audio_bytes
 
-st.title("Traductor de números")
+st.title("Traductor de Español a Mixteco versión de Chalcatongo Oaxaca.")
 
 # Estado de la sesión para la traducción
 if 'oracion_traducida' not in st.session_state:
     st.session_state.oracion_traducida = ""
 
 # Opción para introducir texto
-oracion_usuario = st.text_input("Introduce una palabra:")
+oracion_usuario = st.text_input("Introduce una oración, presiona enter:")
 
 # Traducir la oración ingresada por el usuario
 if oracion_usuario:
@@ -65,6 +45,7 @@ if oracion_usuario:
     st.write(f"Traducción: {oracion_traducida}")
     audio_bytes = reproducir_audio(oracion_traducida, 'es')  # Usando español por defecto
     st.audio(audio_bytes, format='audio/mp3')
+    
 
 
 
