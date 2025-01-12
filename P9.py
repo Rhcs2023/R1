@@ -37,10 +37,10 @@ if 'oracion_traducida' not in st.session_state:
     st.session_state.oracion_traducida = ""
 
 # Opción para introducir texto
-oracion_usuario = st.text_area("Introduce una oración (máx. 10 líneas):", height=200)
+oracion_usuario = st.text_area("Introduce una oración :", height=200)
 
 # Botón para ejecutar la traducción
-if st.button("Traducir"):
+if st.button("ir"):
     if oracion_usuario:
         oracion_traducida = traducir_oracion(oracion_usuario)
         st.session_state.oracion_traducida = oracion_traducida
