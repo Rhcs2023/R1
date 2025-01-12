@@ -29,7 +29,7 @@ def reproducir_audio(texto, lang):
             audio_bytes = audio_file.read()
     return audio_bytes
 
-st.title("Traductor de Español a Mixteco versión de Chalcatongo Oaxaca.")
+st.title("Texto a Voz")
 
 # Estado de la sesión para la traducción
 if 'oracion_traducida' not in st.session_state:
